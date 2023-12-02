@@ -1,24 +1,26 @@
-class Day01: AdventOfCode {
+class Day01 : AdventOfCode {
     override val day = 1
 
     override fun partOne(input: SolutionInput): SolutionResult {
-        return input.lines.sumOf { it.firstAndLastOccurrenceOf(digitNames) }.bind()
+        return input.lines.sumOf { it.firstAndLastOccurrenceOf(digitNames) }.asSolution()
     }
 
     override fun partTwo(input: SolutionInput): SolutionResult {
-        return input.lines.sumOf { it.firstAndLastOccurrenceOf(digitNames + digitFullNames) }.bind()
+        return input.lines.sumOf { it.firstAndLastOccurrenceOf(digitNames + digitFullNames) }.asSolution()
     }
 
     private fun String.firstAndLastOccurrenceOf(names: Map<String, String>): Int {
-        val firstIndices = names.keys.map { names[it] to this.indexOf(it) }.filter { it.second >= 0 }
-        val first = firstIndices.minBy { it.second }.first ?: ""
-        val lastIndices = names.keys.map { names[it] to this.lastIndexOf(it) }.filter { it.second >= 0 }
-        val last = lastIndices.maxBy { it.second }.first ?: ""
-        return "$first$last".toInt()
+        val indicesForFirstOccurrence = names.keys.map { names[it] to this.indexOf(it) }.filter { it.second >= 0 }
+        val firstOccurrenceAsDigit = indicesForFirstOccurrence.minBy { it.second }.first ?: ""
+
+        val indicesForLastOccurrence = names.keys.map { names[it] to this.lastIndexOf(it) }.filter { it.second >= 0 }
+        val lastOccurrenceAsDigit = indicesForLastOccurrence.maxBy { it.second }.first ?: ""
+
+        return "$firstOccurrenceAsDigit$lastOccurrenceAsDigit".toInt()
     }
 
     companion object {
-        private val digitNames = (0..9).associate { it.toString() to it.toString() }
+        private val digitNames = (0..9).map { it.toString() }.associateWith { it }
 
         private val digitFullNames = mapOf(
             "zero" to "0",

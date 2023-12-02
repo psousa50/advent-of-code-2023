@@ -4,10 +4,10 @@ import io.kotest.matchers.shouldBe
 class Day01Test : FunSpec({
     context("Day 01") {
         test("Part 1") {
-            Day01().runPart(1).intValue shouldBe 54708
+            Day01().runPart(1).asInt shouldBe 54708
         }
         test("Part 2") {
-            Day01().runPart(2).intValue shouldBe 54087
+            Day01().runPart(2).asInt shouldBe 54087
         }
     }
 })

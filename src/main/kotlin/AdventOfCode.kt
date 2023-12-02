@@ -23,11 +23,9 @@ data class SolutionInput(
 )
 
 data class SolutionResult(val value: String) {
-    val intValue get() = value.toInt()
-    val longValue get() = value.toLong()
+    val asInt get() = value.toInt()
     override fun toString() = value
+
 }
 
-fun Int.bind() = SolutionResult(this.toString())
-fun Long.bind() = SolutionResult(this.toString())
-fun String.bind() = SolutionResult(this)
+fun Int.asSolution() = SolutionResult(this.toString())

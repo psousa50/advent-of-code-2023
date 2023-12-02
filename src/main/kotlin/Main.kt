@@ -5,10 +5,10 @@ fun main(args: Array<String>) {
     ArgParser(args).parseInto(::MyArgs).run {
         val solution = AdventOfCode.days[day] ?: throw IllegalArgumentException("Day: $day not implemented")
         if (part == 0 || part == 1) {
-            solution.runPart(1, sample)
+            solution.showResult(1, sample)
         }
         if (part == 0 || part == 2) {
-            solution.runPart(2, sample)
+            solution.showResult(2, sample)
         }
     }
 }
@@ -22,6 +22,11 @@ fun AdventOfCode.runPart(part: Int, sample: Boolean = false): SolutionResult {
         2 -> partTwo(input)
         else -> throw IllegalArgumentException("Invalid part $part")
     }
+}
+
+fun AdventOfCode.showResult(part: Int, sample: Boolean = false) {
+    val result = runPart(part, sample)
+    println("Day $day Part $part: $result")
 }
 
 class MyArgs(parser: ArgParser) {
