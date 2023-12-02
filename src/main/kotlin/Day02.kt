@@ -6,11 +6,9 @@ class Day02 : AdventOfCode {
     override fun partOne(input: SolutionInput): SolutionResult {
         val games = parse(input)
         val maxAvailableCubes = CubeCountMap.of(
-            mapOf(
-                Cube.RED to 12,
-                Cube.GREEN to 13,
-                Cube.BLUE to 14,
-            )
+            RED to 12,
+            GREEN to 13,
+            BLUE to 14,
         )
         val possibleGames = games.filter { it possibleWith maxAvailableCubes }
         return possibleGames.sumOf { it.id.toInt() }.asSolution()
@@ -42,19 +40,16 @@ class Day02 : AdventOfCode {
 
     private infix fun Game.possibleWith(maxAvailableCubes: CubeCountMap): Boolean {
         val availableCubes = this.sets.minimumAvailableCubes()
-        return availableCubes[Cube.RED] <= maxAvailableCubes[Cube.RED] &&
-            availableCubes[Cube.GREEN] <= maxAvailableCubes[Cube.GREEN] &&
-            availableCubes[Cube.BLUE] <= maxAvailableCubes[Cube.BLUE]
+        return availableCubes[RED] <= maxAvailableCubes[RED] &&
+            availableCubes[GREEN] <= maxAvailableCubes[GREEN] &&
+            availableCubes[BLUE] <= maxAvailableCubes[BLUE]
     }
 
-    private fun GameSets.minimumAvailableCubes(): CubeCountMap {
-        return CubeCountMap.of(enumValues<Cube>().associateWith { cube -> this.maxOf { it[cube] } })
-    }
+    private fun GameSets.minimumAvailableCubes() =
+        CubeCountMap.of(enumValues<Cube>().associateWith { cube -> this.maxOf { it[cube] } })
 
-    private fun CubeCountMap.multiplyAll(): Int {
-        return values.reduce { acc, i -> acc * i }
-    }
 
+    private fun CubeCountMap.multiplyAll() = values.reduce { product, c -> product * c }
 
     data class Game(
         val id: String,
@@ -66,6 +61,7 @@ class Day02 : AdventOfCode {
 
         companion object {
             fun of(countMap: Map<Cube, Int>) = CubeCountMap().also { it.putAll(countMap) }
+            fun of(vararg countMap: Pair<Cube, Int>) = CubeCountMap().also { it.putAll(countMap) }
         }
     }
 
@@ -73,5 +69,11 @@ class Day02 : AdventOfCode {
         RED,
         BLUE,
         GREEN,
+    }
+
+    companion object {
+        val RED = Cube.RED
+        val BLUE = Cube.BLUE
+        val GREEN = Cube.GREEN
     }
 }
