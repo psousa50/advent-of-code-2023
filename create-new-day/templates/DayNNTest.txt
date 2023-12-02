@@ -1,0 +1,13 @@
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.shouldBe
+
+class {{Day00}}Test : FunSpec({
+    context("Day {{Day00}}") {
+        test("Part 1") {
+            {{Day00}}().runPart(1).intValue shouldBe 0
+        }
+        test("Part 2") {
+            {{Day00}}().runPart(2).intValue shouldBe 0
+        }
+    }
+})
