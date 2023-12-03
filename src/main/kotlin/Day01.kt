@@ -2,14 +2,14 @@ class Day01 : AdventOfCode {
     override val day = 1
 
     override fun partOne(input: SolutionInput): SolutionResult {
-        return input.lines.sumOf { it.firstAndLastOccurrenceOf(digitNames) }.asSolution()
+        return input.lines.sumOf { it.numberWithFirstAndLastOccurrenceOf(digitNames) }.asSolution()
     }
 
     override fun partTwo(input: SolutionInput): SolutionResult {
-        return input.lines.sumOf { it.firstAndLastOccurrenceOf(digitNames + digitFullNames) }.asSolution()
+        return input.lines.sumOf { it.numberWithFirstAndLastOccurrenceOf(digitNames + digitFullNames) }.asSolution()
     }
 
-    private fun String.firstAndLastOccurrenceOf(names: Map<String, String>): Int {
+    private fun String.numberWithFirstAndLastOccurrenceOf(names: Map<String, String>): Int {
         val indicesForFirstOccurrence = names.keys.map { names[it] to this.indexOf(it) }.filter { it.second >= 0 }
         val firstOccurrenceAsDigit = indicesForFirstOccurrence.minBy { it.second }.first ?: ""
 
