@@ -27,12 +27,13 @@ def write_file(file_name, content):
 def create_new_day(day_number):
     # read the template file
     day_nn = read_template("DayNN")
-
     day_name = f"Day{day_number:02d}"
-    write_file(f"{SRC}/{day_name}.kt", day_nn.replace("{{Day}}", str(day_number)))
+    day_nn_file_content = day_nn.replace("{{Day}}", str(day_number)).replace("{{DayNN}}", day_name)
+    write_file(f"{SRC}/{day_name}.kt", day_nn_file_content)
 
     day_test_nn = read_template("DayNNTest")
-    write_file(f"{TEST}/{day_name}Test.kt", day_test_nn.replace("{{Day00}}", day_name))
+    day_nn_test_file_content = day_test_nn.replace("{{DayNN}}", day_name)
+    write_file(f"{TEST}/{day_name}Test.kt", day_nn_test_file_content)
 
     advent_of_code_file_name = f"{SRC}/AdventOfCode.kt"
     advent_of_code_file = read_file(advent_of_code_file_name)

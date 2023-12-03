@@ -1,4 +1,4 @@
-class Day02 : AdventOfCode {
+class {{DayNN}} : AdventOfCode {
     override val day = {{Day}}
 
     override fun partOne(input: SolutionInput): SolutionResult {
