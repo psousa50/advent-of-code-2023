@@ -17,6 +17,9 @@ fun AdventOfCode.runPart(part: Int, sample: Boolean = false): SolutionResult {
     val file = if (sample) "sample$part" else "input"
     val inputFilename = "Day${"%02d".format(day)}/$file.txt"
     val input = SolutionInput(Parsers.readLines(inputFilename))
+    if (input.lines.isEmpty()) {
+        throw IllegalArgumentException("No input found for $inputFilename")
+    }
     return when (part) {
         1 -> partOne(input)
         2 -> partTwo(input)
