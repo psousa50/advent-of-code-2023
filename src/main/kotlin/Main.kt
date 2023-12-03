@@ -2,7 +2,7 @@ import com.xenomachina.argparser.ArgParser
 import com.xenomachina.argparser.default
 
 fun main(args: Array<String>) {
-    ArgParser(args).parseInto(::MyArgs).run {
+    ArgParser(args).parseInto(::AdventOfCodeArgs).run {
         val solution = AdventOfCode.days[day] ?: throw IllegalArgumentException("Day: $day not implemented")
         if (part == 0 || part == 1) {
             solution.showResult(1, sample)
@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
 fun AdventOfCode.runPart(part: Int, sample: Boolean = false): SolutionResult {
     val file = if (sample) "sample$part" else "input"
     val inputFilename = "Day${"%02d".format(day)}/$file.txt"
-    val input = SolutionInput(Parsers.readLines(inputFilename))
+    val input = SolutionInput(Parsers.readLinesFromResource(inputFilename))
     if (input.lines.isEmpty()) {
         throw IllegalArgumentException("No input found for $inputFilename")
     }
@@ -32,7 +32,7 @@ fun AdventOfCode.showResult(part: Int, sample: Boolean = false) {
     println("Day $day Part $part: $result")
 }
 
-class MyArgs(parser: ArgParser) {
+class AdventOfCodeArgs(parser: ArgParser) {
     val sample by parser.flagging(
         "-S", "--sample",
         help = "run on sample input"
