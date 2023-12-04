@@ -16,7 +16,7 @@ class Day02 : AdventOfCode {
 
     override fun partTwo(input: SolutionInput): SolutionResult {
         val games = parse(input)
-        return games.sumOf { it.sets.minimumAvailableCubes().multiplyAll() }.asSolution()
+        return games.sumOf { it.sets.maxCubeUtilization().multiplyAll() }.asSolution()
     }
 
     private fun parse(input: SolutionInput) =
@@ -39,13 +39,13 @@ class Day02 : AdventOfCode {
     }
 
     private infix fun Game.possibleWith(maxAvailableCubes: CubeCount): Boolean {
-        val availableCubes = this.sets.minimumAvailableCubes()
+        val availableCubes = this.sets.maxCubeUtilization()
         return availableCubes[RED] <= maxAvailableCubes[RED] &&
             availableCubes[GREEN] <= maxAvailableCubes[GREEN] &&
             availableCubes[BLUE] <= maxAvailableCubes[BLUE]
     }
 
-    private fun GameSets.minimumAvailableCubes() =
+    private fun GameSets.maxCubeUtilization() =
         CubeCount.of(enumValues<Cube>().associateWith { cube -> this.maxOf { it[cube] } })
 
 
