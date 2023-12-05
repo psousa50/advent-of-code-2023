@@ -1,5 +1,6 @@
 import com.xenomachina.argparser.ArgParser
 import com.xenomachina.argparser.default
+import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     ArgParser(args).parseInto(::AdventOfCodeArgs).run {
@@ -28,8 +29,16 @@ fun AdventOfCode.runPart(part: Int, sample: Boolean = false): SolutionResult {
 }
 
 fun AdventOfCode.showResult(part: Int, sample: Boolean = false) {
-    val result = runPart(part, sample)
-    println("Day $day Part $part: $result")
+    val result = measureExecutionTime {  runPart(part, sample)}
+    println("Day $day Part $part: ${result.first} (${result.second}ms)")
+}
+
+fun <T> measureExecutionTime(block: () -> T): Pair<T, Long> {
+    var result: T?
+    val executionTime = measureTimeMillis {
+        result = block()
+    }
+    return Pair(result!!, executionTime)
 }
 
 class AdventOfCodeArgs(parser: ArgParser) {

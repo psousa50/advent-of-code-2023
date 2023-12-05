@@ -15,6 +15,7 @@ interface AdventOfCode {
             2 to Day02(),
             3 to Day03(),
             4 to Day04(),
+            5 to Day05(),
             // {{ NextDay }}
         )
     }
@@ -31,3 +32,4 @@ data class SolutionResult(val value: String) {
 }
 
 fun Int.asSolution() = SolutionResult(this.toString())
+fun Long.asSolution() = SolutionResult(this.toString())
