@@ -16,7 +16,7 @@ class Day02 : AdventOfCode {
 
     override fun partTwo(input: SolutionInput): SolutionResult {
         val games = parse(input)
-        return games.sumOf { it.sets.maxCubeUtilization().multiplyAll() }.asSolution()
+        return games.sumOf { it.sets.maxCubeUtilization().values.product() }.asSolution()
     }
 
     private fun parse(input: SolutionInput) =
@@ -47,9 +47,6 @@ class Day02 : AdventOfCode {
 
     private fun GameSets.maxCubeUtilization() =
         CubeCount.of(enumValues<Cube>().associateWith { cube -> this.maxOf { it[cube] } })
-
-
-    private fun CubeCount.multiplyAll() = values.reduce { product, c -> product * c }
 
     data class Game(
         val id: String,

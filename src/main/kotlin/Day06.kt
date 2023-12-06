@@ -11,7 +11,7 @@ class Day06 : AdventOfCode {
 
         val winningRacesCount = times.mapIndexed { i, time -> countWinningRaces(time, winningDistances[i]) }
 
-        return winningRacesCount.reduce { acc, i -> acc * i }.asSolution()
+        return winningRacesCount.product().asSolution()
     }
 
     override fun partTwo(input: SolutionInput): SolutionResult {

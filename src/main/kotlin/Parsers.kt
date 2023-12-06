@@ -16,6 +16,7 @@ object Parsers {
                 }
             }
         }
-
 }
 
+fun Collection<Int>.product() = reduce { acc, i -> acc * i }
+fun Collection<Long>.product() = reduce { acc, i -> acc * i }
