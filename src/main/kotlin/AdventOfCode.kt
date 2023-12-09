@@ -19,6 +19,7 @@ interface AdventOfCode {
             6 to Day06(),
             7 to Day07(),
             8 to Day08(),
+            9 to Day09(),
             // {{ NextDay }}
         )
     }
